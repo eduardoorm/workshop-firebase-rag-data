@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dataconnect/auth": "file:src/dataconnect-generated/auth",
+    "@dataconnect/generated": "file:src/dataconnect-generated",
+    "@dataconnect/tasks": "file:src/dataconnect-generated/tasks",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.9",
@@ -18,7 +21,8 @@
     "firebase": "^12.11.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.2"
+    "react-router-dom": "^7.13.2",
+    "react-syntax-highlighter": "^16.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",

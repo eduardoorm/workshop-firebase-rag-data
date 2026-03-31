@@ -1,0 +1,14 @@
+query GetTasks
+@auth(level: PUBLIC, insecureReason: "Anyone can list all tasks.") {
+  tasks {
+    id
+    name
+    description
+    status
+  }
+}
+
+mutation CreateTask($name: String!, $description: String, $status: String!)
+@auth(level: PUBLIC, insecureReason: "Anyone can create tasks.") {
+  task_insert(data: { name: $name, description: $description, status: $status })
+}

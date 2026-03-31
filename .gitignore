@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.env
+
+# Firebase Data Connect generated SDK
+src/dataconnect-generated

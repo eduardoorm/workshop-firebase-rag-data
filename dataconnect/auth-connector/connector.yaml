@@ -1,0 +1,8 @@
+connectorId: auth
+generate:
+  javascriptSdk:
+    - outputDir: ../../src/dataconnect-generated/auth
+      package: "@dataconnect/auth"
+      packageJsonDir: ../..
+      react: true
+      angular: false

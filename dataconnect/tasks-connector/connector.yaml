@@ -1,0 +1,8 @@
+connectorId: tasks
+generate:
+  javascriptSdk:
+    - outputDir: ../../src/dataconnect-generated/tasks
+      package: "@dataconnect/tasks"
+      packageJsonDir: ../..
+      react: true
+      angular: false
