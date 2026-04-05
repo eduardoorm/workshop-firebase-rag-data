@@ -4,3 +4,27 @@ type Task @table {
   description: String
   status: String!
 }
+
+type Destination @table {
+  ref: String!
+  imageUrl: String
+  name: String!
+  country: String!
+  continent: String!
+  knownFor: String
+  tags: [String!]
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Activity @table(key: ["destination", "ref"]) {
+  destination: Destination!
+  ref: String!
+  imageUrl: String
+  name: String!
+  description: String!
+  locationName: String!
+  durationHours: String
+  timeOfDay: String
+  familyFriendly: Boolean
+  price: Int
+}

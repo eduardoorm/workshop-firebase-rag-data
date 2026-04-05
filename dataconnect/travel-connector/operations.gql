@@ -1,0 +1,25 @@
+query ListDestinations($continent: String, $limit: Int = 15)
+@auth(level: PUBLIC, insecureReason: "Anyone can list destinations.") {
+  destination_list(filter: { continent: { eq: $continent } }, limit: $limit) {
+    name
+    country
+    continent
+    knownFor
+    imageUrl
+    tags
+  }
+}
+
+query GetDestination($ref: String!)
+@auth(level: PUBLIC, insecureReason: "Anyone can get destination details.") {
+  destination_get(ref: $ref) {
+    ref
+    name
+    imageUrl
+    activities: activities_on_destination {
+      ref
+      name
+      imageUrl
+    }
+  }
+}

@@ -1,0 +1,8 @@
+connectorId: travel
+generate:
+  javascriptSdk:
+    - outputDir: ../../src/dataconnect-generated/travel
+      package: "@dataconnect/travel"
+      packageJsonDir: ../..
+      react: true
+      angular: false

@@ -1,121 +1,68 @@
-import { createTask } from "../../application/task/createTask";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { getTasks } from "../../application/task/getTasks";
-import { type Task } from "../../domain";
+import { Button } from "@mui/material";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import DestinationCard from "../components/DestinationCard";
+
+const destinations = [
+  {
+    name: "Paracas",
+    imageUrl: "/paracas.png",
+    description: "Reserva natural con playas y fauna única del Perú.",
+    tags: ["Beach", "Nature"],
+  },
+  {
+    name: "Cusco",
+    imageUrl: "/paracas.png",
+    description: "Ciudad imperial de los Incas llena de historia.",
+    tags: ["History", "Culture"],
+  },
+  {
+    name: "Máncora",
+    imageUrl: "/paracas.png",
+    description: "Playa de aguas cálidas en el norte del Perú.",
+    tags: ["Beach", "Surf"],
+  },
+];
 
 const HomePage = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-
-  const handleAddTask = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const taskInput = (e.target as HTMLFormElement).task.value;
-    await createTask(taskInput, "pending");
-  };
-
-  useEffect(() => {
-    const loadTasks = async () => {
-      const result: Task[] = await getTasks();
-      setTasks(result);
-    };
-    loadTasks();
-  }, []);
   return (
     <>
-      <Box
+      <Swiper
+        modules={[Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        spaceBetween={20}
+        slidesPerView={2}
+        style={{ padding: "20px", width: "70vw", margin: "0 auto" }}
+      >
+        {destinations.map((dest) => (
+          <SwiperSlide key={dest.name}>
+            <DestinationCard
+              name={dest.name}
+              imageUrl={dest.imageUrl}
+              description={dest.description}
+              tags={dest.tags}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <Button
+        variant="contained"
+        color="primary"
         sx={{
           margin: "20px auto",
-          border: "1px solid #ccc",
+          display: "block",
+          width: "500px",
+          height: "50px",
+          fontSize: "18px",
         }}
       >
-        <Typography
-          variant="h1"
-          sx={{ fontSize: "2rem", marginBottom: "10px" }}
-        >
-          Firebase Data Connect
-        </Typography>
-
-        <Typography variant="body1">
-          Es un servicio de Firebase que te permite trabajar con bases de datos
-          SQL usando un enfoque moderno basado en GraphQL.
-        </Typography>
-
-        <SyntaxHighlighter language="graphql">
-          {`
-            PASO 1:
-            type Task @table {
-            id: UUID! @default(uuid())
-            title: String!
-            completed: Boolean! @default(false)
-            }
-
-            PASO 2:
-            query GetTasks {
-            tasks {
-                id
-                title
-                completed
-            }
-
-            PASO 3:
-            mutation AddTask($title: String!) {
-            insertTask(data: { title: $title }) {
-                id
-                title
-            }
-            }
-          `}
-        </SyntaxHighlighter>
-      </Box>
-
-      <Box
-        component="form"
-        sx={{
-          margin: "20px auto",
-          border: "1px solid #ccc",
-          padding: "20px",
-          width: "400px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-        onSubmit={handleAddTask}
-      >
-        <TextField
-          id="task"
-          label="Task"
-          aria-describedby="Enter your task"
-          fullWidth
-        />
-        <Button type="submit" color="primary" variant="contained">
-          Add Task
-        </Button>
-      </Box>
-
-      <Box
-        sx={{
-          margin: "20px auto",
-          border: "1px solid #ccc",
-          padding: "20px",
-          width: "400px",
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{ fontSize: "1.5rem", marginBottom: "10px" }}
-        >
-          Tasks List
-          {tasks?.map((task) => (
-            <Typography key={task.id} variant="body1">
-              {task.name} - {task.status}
-            </Typography>
-          ))}
-        </Typography>
-      </Box>
+        Find my trip
+      </Button>
     </>
   );
 };
